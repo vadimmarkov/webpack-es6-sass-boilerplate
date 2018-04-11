@@ -4,7 +4,7 @@ A minimalistic Webpack 4 ES6 boilerplate project.
 
 ## Start Dev Server
 
-1.  `git clone https://github.com/.git`
+1.  `git clone https://github.com/markovv/webpack-es6-boilerplate.git`
 2.  Run `yarn install`
 3.  Start the dev server using `yarn dev`
 
