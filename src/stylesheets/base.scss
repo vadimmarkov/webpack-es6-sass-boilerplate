@@ -1,0 +1,16 @@
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: #fff;
+  min-height: 100%;
+  font-family: Roboto, sans-serif;
+}
