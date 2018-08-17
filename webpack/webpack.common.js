@@ -1,63 +1,52 @@
-const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const autoprefixer = require('autoprefixer');
 const paths = require('./paths');
 
 module.exports = {
   context: paths.src,
   entry: {
-    app: `./scripts/index.js`
+    app: `./scripts/index.js`,
   },
   output: {
     filename: `scripts/[name].[hash:10].js`,
-    path: paths.dist
+    path: paths.dist,
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
       },
       {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader'
-        })
-      },
-      {
-        test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                sourceMap: true,
-                importLoaders: 1
-              }
+        test: /\.(scss|css)$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2,
+              sourceMap: true,
             },
-            {
-              loader: 'postcss-loader',
-              options: {
-                ident: 'postcss',
-                sourceMap: true,
-                plugins: () => [
-                  autoprefixer()
-                ]
-              }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [require('autoprefixer')],
+              sourceMap: true,
             },
-            {
-              loader: 'sass-loader',
-              options: { sourceMap: true }
-            }
-          ]
-        })
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
       },
       {
         test: /\.html$/,
-        use: 'html-loader'
+        use: 'html-loader',
       },
       {
         test: /\.(woff2?|eot|ttf|otf)$/,
@@ -66,9 +55,9 @@ module.exports = {
           options: {
             publicPath: '../fonts',
             outputPath: 'fonts',
-            name: '[name].[hash:10].[ext]'
-          }
-        }
+            name: '[name].[hash:10].[ext]',
+          },
+        },
       },
       {
         test: /\.(gif|ico|jpe?g|png|svg|webp)$/,
@@ -77,14 +66,16 @@ module.exports = {
           options: {
             publicPath: '../images',
             outputPath: 'images',
-            name: '[name].[hash:10].[ext]'
-          }
-        }
-      }
-    ]
+            name: '[name].[hash:10].[ext]',
+          },
+        },
+      },
+    ],
   },
   plugins: [
-    new ExtractTextPlugin(`stylesheets/[name].[hash:10].css`),
-    new CopyWebpackPlugin([{ from: paths.static }])
-  ]
+    new MiniCssExtractPlugin({
+      filename: 'stylesheets/[name].[hash:10].css',
+    }),
+    new CopyWebpackPlugin([{ from: paths.static }]),
+  ],
 };
