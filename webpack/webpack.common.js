@@ -8,8 +8,8 @@ module.exports = {
     app: `./scripts/index.js`,
   },
   output: {
-    filename: `scripts/[name].[hash:10].js`,
-    path: paths.dist,
+    filename: `scripts/[name].[hash:8].js`,
+    path: paths.build,
   },
   module: {
     rules: [
@@ -19,7 +19,7 @@ module.exports = {
         loader: 'babel-loader',
       },
       {
-        test: /\.(scss|css)$/,
+        test: /\.(css|scss)$/,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -32,7 +32,7 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              plugins: () => [require('autoprefixer')],
+              plugins: () => [require('autoprefixer'), require('postcss-flexbugs-fixes')],
               sourceMap: true,
             },
           },
@@ -55,7 +55,7 @@ module.exports = {
           options: {
             publicPath: '../fonts',
             outputPath: 'fonts',
-            name: '[name].[hash:10].[ext]',
+            name: '[name].[hash:8].[ext]',
           },
         },
       },
@@ -66,7 +66,7 @@ module.exports = {
           options: {
             publicPath: '../images',
             outputPath: 'images',
-            name: '[name].[hash:10].[ext]',
+            name: '[name].[hash:8].[ext]',
           },
         },
       },
@@ -74,7 +74,7 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'stylesheets/[name].[hash:10].css',
+      filename: 'stylesheets/[name].[hash:8].css',
     }),
     new CopyWebpackPlugin([{ from: paths.static }]),
   ],

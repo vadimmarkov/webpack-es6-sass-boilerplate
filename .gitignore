@@ -1,8 +1,9 @@
 
 # Created by https://www.gitignore.io/api/node,macos,windows
 
-### Costom ###
-dist
+### Custom ###
+build
+stats.json
 
 ### macOS ###
 *.DS_Store

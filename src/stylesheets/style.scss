@@ -1,24 +1,31 @@
-@import '../../node_modules/normalize.css/normalize.css';
-@import './media.scss';
-@import './base.scss';
-@import './fonts.scss';
+@import '~normalize.css/normalize.css';
+@import './base';
+@import './media';
+@import './fonts';
 
 // custom styles
+
+html {
+  height: 100%;
+}
+
 body {
-  display: flex;
   align-items: center;
+  display: flex;
   flex-direction: column;
   justify-content: center;
+  min-height: 100%;
 }
 
 a {
+  position: relative;
   background-position: center;
   background-repeat: no-repeat;
   display: inline-block;
 
   img {
-    width: 80px;
     display: inline-block;
     vertical-align: middle;
+    width: 80px;
   }
 }

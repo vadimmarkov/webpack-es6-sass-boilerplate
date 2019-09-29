@@ -1,106 +1,95 @@
 {
-  "name": "webpack-es6-boilerplate",
-  "version": "0.1.0",
+  "name": "webpack-es6-sass-boilerplate",
+  "version": "0.2.0",
+  "description": "A minimalistic webpack 4 based boilerplate for building web apps",
   "author": "Vadim Markov",
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/vadimmarkov/webpack-es6-boilerplate.git"
+    "url": "https://github.com/vadimmarkov/webpack-es6-sass-boilerplate.git"
   },
   "scripts": {
-    "predev": "rimraf dist",
-    "dev": "webpack-dev-server --open --mode development",
-    "prebuild": "rimraf dist",
-    "build": "webpack --mode production --display-error-details",
-    "eslint": "eslint '**/*.js' --fix --quiet",
-    "stylelint": "stylelint 'src/stylesheets/**/*.scss'; exit 0"
-  },
-  "dependencies": {
-    "apache-server-configs": "^3.0.0",
-    "eslint": "^5.3.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-prettier": "^3.0.1",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-prettier": "^2.6.2",
-    "normalize.css": "^8.0.0",
-    "prettier": "^1.14.2",
-    "stylelint": "^9.4.0",
-    "stylelint-config-standard": "^18.2.0",
-    "stylelint-scss": "^3.3.0"
+    "prestart": "rimraf build && rimraf ./stats.json",
+    "start": "webpack-dev-server --open --mode development",
+    "prebuild": "rimraf build && rimraf ./stats.json",
+    "build": "webpack --mode production --progress --display-error-details",
+    "check-eslint-config": "eslint --print-config .eslintrc | eslint-config-prettier-check",
+    "check-stylelint-config": "stylelint-config-prettier-check",
+    "lint-code": "eslint 'src/scripts/**/*.js'",
+    "lint-style": "stylelint 'src/stylesheets/**/*.{css,scss}'",
+    "analyze": "webpack-bundle-analyzer ./stats.json"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-rc.1",
-    "@babel/plugin-proposal-class-properties": "^7.0.0-rc.1",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-rc.1",
-    "@babel/preset-env": "^7.0.0-rc.1",
-    "autoprefixer": "^9.1.1",
-    "babel-loader": "^8.0.0-beta",
-    "copy-webpack-plugin": "^4.5.2",
-    "css-loader": "^1.0.0",
+    "@babel/core": "^7.6.2",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+    "@babel/plugin-transform-async-to-generator": "^7.5.0",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "@babel/runtime": "^7.6.2",
+    "autoprefixer": "^9.6.1",
+    "babel-loader": "^8.0.6",
+    "copy-webpack-plugin": "^5.0.4",
+    "css-loader": "^3.2.0",
     "csso-webpack-plugin": "^1.0.0-beta.12",
-    "file-loader": "^1.1.11",
+    "eslint": "^6.4.0",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.1",
+    "file-loader": "^4.2.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
-    "mini-css-extract-plugin": "^0.4.1",
-    "node-sass": "^4.9.3",
+    "husky": "^3.0.5",
+    "lint-staged": "^9.4.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.12.0",
+    "normalize.css": "^8.0.1",
+    "postcss-flexbugs-fixes": "^4.1.0",
     "postcss-loader": "^3.0.0",
-    "rimraf": "^2.6.2",
-    "sass-loader": "^7.1.0",
-    "style-loader": "^0.22.1",
-    "webpack": "^4.16.5",
-    "webpack-assets-manifest": "^3.0.2",
-    "webpack-bundle-analyzer": "^2.13.1",
-    "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.5",
-    "webpack-merge": "^4.1.4"
+    "prettier": "^1.18.2",
+    "rimraf": "^3.0.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "stylelint": "^11.0.0",
+    "stylelint-config-prettier": "^6.0.0",
+    "stylelint-config-recommended": "^3.0.0",
+    "stylelint-config-sass-guidelines": "^6.1.0",
+    "stylelint-prettier": "^1.1.1",
+    "stylelint-scss": "^3.11.1",
+    "webpack": "^4.41.0",
+    "webpack-assets-manifest": "^3.1.1",
+    "webpack-bundle-analyzer": "^3.5.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.1",
+    "webpack-merge": "^4.2.2",
+    "webpack-stats-plugin": "0.3.0"
   },
-  "browserslist": [
-    "> 1%",
-    "Last 2 versions",
-    "ie 11"
-  ],
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
     ],
-    "plugins": [
-      "@babel/plugin-proposal-object-rest-spread",
-      "@babel/plugin-proposal-class-properties"
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
     ]
   },
-  "eslintConfig": {
-    "extends": [
-      "airbnb-base",
-      "prettier"
-    ],
-    "env": {
-      "browser": true,
-      "node": true
-    },
-    "rules": {
-      "prettier/prettier": [
-        "error",
-        {
-          "trailingComma": "es5",
-          "singleQuote": true,
-          "printWidth": 120
-        }
-      ]
-    },
-    "plugins": [
-      "prettier"
-    ]
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn check-eslint-config && yarn lint-code && yarn check-stylelint-config && yarn lint-style"
+    }
   },
-  "eslintIgnore": [
-    "**/*{.,-}min.js",
-    "**/dist/*",
-    "**/webpack/*",
-    "**/node_modules/*",
-    "webpack.config.js"
-  ],
-  "stylelint": {
-    "extends": "stylelint-config-standard",
-    "plugins": [
-      "stylelint-scss"
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{css,scss}": [
+      "stylelint --fix",
+      "git add"
     ]
   }
 }
