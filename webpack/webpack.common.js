@@ -32,7 +32,9 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              plugins: () => [require('autoprefixer'), require('postcss-flexbugs-fixes')],
+              postcssOptions: {
+                plugins: ['autoprefixer', 'postcss-flexbugs-fixes'],
+              },
               sourceMap: true,
             },
           },
@@ -76,6 +78,12 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'stylesheets/[name].[hash:8].css',
     }),
-    new CopyWebpackPlugin([{ from: paths.static }]),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: paths.static,
+        },
+      ],
+    }),
   ],
 };
