@@ -63,7 +63,7 @@
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.2.0",
     "webpack-stats-plugin": "0.3.2",
-    "postcss": "^8.2.10"
+    "postcss": "^8.2.13"
   },
   "browserslist": {
     "production": [
